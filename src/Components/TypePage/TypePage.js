@@ -52,7 +52,6 @@ function TypePage(props) {
       <MenuBar toggleSideBar={props.toggleSideBar} text={type} />
       <div style={{ minHeight: "100vh", paddingTop: 100 }}>
         <Segment inverted className='segment-border' style={segmentStyle}>
-          <h1>{type}</h1>
           {loading ? (
             <Icon loading size='huge' name='spinner' style={{ margin: 100 }} />
           ) : (
