@@ -358,7 +358,9 @@ function UploadPost(props) {
           />
         </div>
       ) : (
-        <h1 style={{ paddingTop: 100 }}>Access Denied</h1>
+        <div style={{ minHeight: "100vh" }}>
+          <h1 style={{ paddingTop: 100 }}>Access Denied</h1>
+        </div>
       )}
     </>
   );

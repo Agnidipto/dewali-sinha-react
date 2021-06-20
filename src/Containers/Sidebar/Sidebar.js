@@ -42,7 +42,7 @@ function AppSidebar(props) {
       onHide={props.onHide}
       vertical
       visible={props.visible}
-      style={{ position: "fixed", width: "25%", minWidth: "200px" }}
+      style={{ position: "fixed", width: "25%", minWidth: "300px" }}
       onVisible={() => {
         localStorage.getItem("token") != null
           ? setLoggedIn(true)

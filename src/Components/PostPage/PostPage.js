@@ -7,6 +7,7 @@ import getPostById from "./PostPageService";
 import { Segment, Icon, List, Image } from "semantic-ui-react";
 import { Parallax, Background } from "react-parallax";
 import Fade from "react-reveal/Fade";
+import OnePictureDisplay from "../OnePictureDisplay";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination, Navigation } from "swiper/core";
@@ -17,6 +18,10 @@ function PostPage(props) {
   const [id, setId] = useState(params.id);
   const [error, setError] = useState({ open: false, message: null });
   const [loading, setLoading] = useState(true);
+
+  const [showPicture, setShowPicture] = useState(false);
+  const [picture, setPicture] = useState(null);
+
   SwiperCore.use([Pagination, Navigation]);
   useEffect(() => {
     getPostById(id)
@@ -111,6 +116,10 @@ function PostPage(props) {
                         // maxHeight: "200px",
                       }}
                       src={"data:image/png;base64," + picture.file}
+                      onClick={() => {
+                        setShowPicture(true);
+                        setPicture("data:image/png;base64," + picture.file);
+                      }}
                     />
                   </SwiperSlide>
                 );
@@ -123,6 +132,12 @@ function PostPage(props) {
         open={error.open}
         message={error.message}
         setOpen={setError}
+      />
+      <OnePictureDisplay
+        open={showPicture}
+        setOpen={setShowPicture}
+        picture={picture}
+        heading={post.name}
       />
     </>
   );
