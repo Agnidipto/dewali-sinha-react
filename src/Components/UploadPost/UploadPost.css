@@ -1,0 +1,25 @@
+.add-image-icon {
+  vertical-align: bottom;
+  display: inline-block;
+  height: 100px;
+  width: 60px;
+  font-size: 50px;
+  color: #00b5ad;
+  margin-top: 20px;
+  transition: transform 0.2s, color 0.7s;
+  cursor: pointer;
+}
+
+.add-image-icon:hover {
+  color: white;
+
+  transform: scale(1.1);
+}
+
+.remove-image-icon {
+  transition: transform 0.5s;
+}
+
+.remove-image-icon:hover {
+  transform: scale(1.3);
+}

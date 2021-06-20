@@ -1,0 +1,30 @@
+.clickable {
+  color: white;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.clickable:hover {
+  transition: all 0.5s;
+  background: rgb(46, 46, 46);
+}
+
+.clickable.header {
+  border-bottom: 1px solid teal;
+}
+
+.clickable.header:hover {
+  color: #00b5ad;
+}
+
+.clickable.posts:hover {
+  color: red;
+}
+
+.clickable.admin:hover {
+  color: orange;
+}
+
+.clickable.signin:hover {
+  color: #2185d0;
+}

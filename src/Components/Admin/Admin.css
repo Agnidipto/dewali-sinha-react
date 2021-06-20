@@ -1,0 +1,10 @@
+.custom-card {
+  cursor: pointer;
+  background-color: rgb(41, 41, 41) !important;
+  transition: all 0.3s !important;
+}
+
+.custom-card:hover {
+  transition: all 0.3s !important;
+  background-color: #2185d0 !important;
+}
