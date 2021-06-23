@@ -19,6 +19,8 @@ function Admin(props) {
   const stickyRef = useRef(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     authority()
       .then((res) => {
         console.log(res.data);

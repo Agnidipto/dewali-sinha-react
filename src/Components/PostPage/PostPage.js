@@ -34,6 +34,8 @@ function PostPage(props) {
   }, [id]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     setId(params.id);
     setLoading(true);
   }, [params.id]);

@@ -46,8 +46,7 @@ export const getWebContentByName = (name) => {
 };
 
 export const getTypePage = (name, count = 3) => {
-  if (count < 1) count = 1;
-  return axios.get(apiUrl.testurl + `/type/0/${count}`, {
+  return axios.get(apiUrl.testurl + `/type/${count}/2`, {
     params: { type: name },
   });
 };

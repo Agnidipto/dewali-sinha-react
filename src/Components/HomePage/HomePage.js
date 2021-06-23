@@ -41,6 +41,7 @@ function HomePage(props) {
   const [types, setTypes] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getWebPictureByName("Display Picture")
       .then((res) => setDisplayImage(res.data.file.file))
       .catch((err) => setError(ErrorFunction(err)));
@@ -102,7 +103,7 @@ function HomePage(props) {
                     }}
                   >
                     <p
-                      className='cursive teal-text'
+                      className='cursive light-teal-text'
                       style={{ fontSize: 50, margin: 0 }}
                     >
                       Hello,{" "}
@@ -112,11 +113,11 @@ function HomePage(props) {
                         fontSize: 20,
                       }}
                     >
-                      My name is Dewali Sinha. I am a housewife by profession,
-                      and making arts and crafts is my hobby. Welcome to my
+                      My name is Dewali Sinha. I am a mom and homemaker by
+                      profession, and creating art is my hobby. Welcome to my
                       humble abode, where all of my imaginations and creativity
-                      thrive. If you like what you see, I am very grateful that
-                      I have produced something, that was worth your time!
+                      thrive. If you like what you see, I will be very grateful
+                      that I have produced something, that was worth your time!
                     </p>
                   </div>
                 </Grid.Column>

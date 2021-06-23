@@ -90,3 +90,7 @@ body::-webkit-scrollbar-thumb:hover {
 .picture-display {
   width: 100%;
 }
+
+.light-teal-text {
+  color: #6bbeba;
+}

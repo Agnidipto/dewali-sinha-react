@@ -240,6 +240,7 @@ function UploadPost(props) {
         <div
           style={{
             paddingTop: "50px",
+            paddingBottom: "50px",
             textAlign: "center",
             minHeight: "100vh",
           }}
@@ -309,7 +310,7 @@ function UploadPost(props) {
             <div style={{ paddingTop: "50px" }}>
               <Segment
                 inverted
-                style={{ width: "60%", minWidth: 450, margin: "auto" }}
+                style={{ width: "60%", margin: "auto", minWidth: "400px" }}
                 className='segment-border'
               >
                 <h1>Upload post {type}</h1>

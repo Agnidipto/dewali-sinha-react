@@ -12,6 +12,7 @@ import getTypePostsCount, { getTypePage } from "./TypePageService";
 import _ from "lodash";
 import { Grid, Card, Icon, Button, Segment } from "semantic-ui-react";
 import Cards from "../Cards/Cards";
+import CardLoading from "../Cards/CardLoading";
 
 function TypePage(props) {
   const [posts, setPosts] = useState([]);
@@ -20,21 +21,51 @@ function TypePage(props) {
   const [error, setError] = useState({ open: false, message: null });
   let url = useLocation().pathname;
   const [loading, setLoading] = useState(true);
+  var page = 0;
+  var x = [];
+  var total = 0;
+  const [final, setFinal] = useState(0);
+  const [loadCard, setLoadCard] = useState(0);
 
   useEffect(() => {
     getTypePostsCount(params.name)
       .then((res) => {
-        getTypePage(type, res.data)
-          .then((res) => {
-            setPosts(res.data);
-            setLoading(false);
-          })
-          .catch((err) => setError(ErrorFunction(err)));
+        const count = res.data;
+        total = count;
+        setFinal(count);
+        setLoadCard(count);
+        refreshPost();
       })
       .catch((err) => setError(ErrorFunction(err)));
   }, [type]);
 
+  function refreshPost() {
+    // for (var i = 0; i < total; i++)
+    console.log(x.length, total);
+    if (x.length < total)
+      getTypePage(type, page)
+        .then((res) => {
+          console.log(res.data);
+          res.data.map((data) => (data != null ? (x = x.concat(data)) : null));
+          // x = x.concat(res.data[0]);
+
+          setPosts(x);
+          setLoading(false);
+
+          page++;
+          // console.log(page);
+          refreshPost();
+        })
+        .catch((err) => setError(ErrorFunction(err)));
+  }
+
   useEffect(() => {
+    // console.log(posts);
+  }, [posts]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
     setType(_.startCase(_.lowerCase(params.name)));
     setLoading(true);
     setPosts([]);
@@ -66,6 +97,15 @@ function TypePage(props) {
                     <Cards post={post} setError={props.setError} />
                   </Grid.Column>
                 ))}
+                {posts.length !== final && (
+                  <Grid.Column
+                    computer={4}
+                    tablet={8}
+                    style={{ marginBottom: 20 }}
+                  >
+                    <CardLoading />
+                  </Grid.Column>
+                )}
               </Grid.Row>
             </Grid>
           )}

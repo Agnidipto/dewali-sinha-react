@@ -43,6 +43,7 @@ function Cards(props) {
           boxShadow: "none",
           height: "100%",
           marginBottom: 20,
+          minHeight: "272px",
         }}
         link
       >
@@ -58,7 +59,7 @@ function Cards(props) {
           style={{ paddingBottom: 0 }}
           onClick={() => props.history.push("/post/" + post.postId)}
         >
-          <Card.Header style={{ color: "white" }}>{name}</Card.Header>
+          <Card.Header style={{ color: "#6bbeba" }}>{name}</Card.Header>
           <Card.Meta style={{ color: "grey" }}>
             {TimeAgo(post.datetime)}
           </Card.Meta>

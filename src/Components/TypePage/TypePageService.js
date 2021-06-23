@@ -9,9 +9,8 @@ export const getTypePostsCount = (type) => {
   return axios.get(apiUrl.testurl + `/post/count`, { params: { type: type } });
 };
 
-export const getTypePage = (name, count = 3) => {
-  if (count < 1) count = 1;
-  return axios.get(apiUrl.testurl + `/type/0/${count}`, {
+export const getTypePage = (name, count = 0) => {
+  return axios.get(apiUrl.testurl + `/type/${count}/2`, {
     params: { type: name },
   });
 };

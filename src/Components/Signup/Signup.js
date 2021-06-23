@@ -157,7 +157,7 @@ function Signup(props) {
       <Segment
         inverted
         className='segment-border'
-        style={{ width: "60%", margin: "auto", minWidth: 450 }}
+        style={{ width: "60%", margin: "auto", minWidth: 400 }}
       >
         <h1 className='login-title'>Admin SignUp</h1>
 
