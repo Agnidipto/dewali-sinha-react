@@ -3,13 +3,11 @@ import { Parallax, Background } from "react-parallax";
 import Menubar from "../../Containers/Menubar/Menubar";
 import Fade from "react-reveal/Fade";
 import { Grid, Image } from "semantic-ui-react";
-import getWebPictureByName, {
-  getWebContentByName,
-  getAllTypes,
-} from "./HomePageService";
+import { getAllTypes } from "./HomePageService";
 import ErrorFunction from "../ErrorFunction";
 import ErrorModal from "../Modals/ErrorModal";
 import TypeSegment from "./TypeSegment";
+import ReactGA from "react-ga";
 
 import Homepage from "../../Utility/Pictures/homepage.jpg";
 import homepage1 from "../../Utility/Pictures/homepage1.jpg";
@@ -42,17 +40,10 @@ function HomePage(props) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    getWebPictureByName("Display Picture")
-      .then((res) => setDisplayImage(res.data.file.file))
-      .catch((err) => setError(ErrorFunction(err)));
-    getWebContentByName("Main Page 1")
-      .then((res) => {
-        setAbout(res.data.content);
-      })
-      .catch((err) => setError(ErrorFunction(err)));
+    ReactGA.initialize("UA-173426368-1");
+    ReactGA.pageview(window.location.pathname + window.location.search);
     getAllTypes()
       .then((res) => {
-        console.log(res.data);
         setTypes(res.data);
       })
       .catch((err) => {

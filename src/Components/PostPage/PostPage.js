@@ -8,6 +8,7 @@ import { Segment, Icon, List, Image } from "semantic-ui-react";
 import { Parallax, Background } from "react-parallax";
 import Fade from "react-reveal/Fade";
 import OnePictureDisplay from "../OnePictureDisplay";
+import ReactGA from "react-ga";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination, Navigation } from "swiper/core";
@@ -27,7 +28,6 @@ function PostPage(props) {
     getPostById(id)
       .then((res) => {
         setPost(res.data);
-        console.log(res.data);
         setLoading(false);
       })
       .catch((err) => setError(ErrorFunction(err)));
@@ -35,6 +35,8 @@ function PostPage(props) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    ReactGA.initialize("UA-173426368-1");
+    ReactGA.pageview(window.location.pathname + window.location.search);
 
     setId(params.id);
     setLoading(true);

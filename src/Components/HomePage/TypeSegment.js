@@ -17,7 +17,6 @@ function TypeSegment(props) {
     var i = 0;
     function refresh() {
       if (x.length < 3) {
-        console.log(i);
         getTypePage(type, i)
           .then((res) => {
             res.data.map((data) =>

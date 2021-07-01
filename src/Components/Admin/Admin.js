@@ -23,7 +23,6 @@ function Admin(props) {
 
     authority()
       .then((res) => {
-        console.log(res.data);
         setAuth(true);
         getAllTypes()
           .then((res) => {
@@ -56,10 +55,10 @@ function Admin(props) {
   return (
     <>
       <MenuBar toggleSideBar={props.toggleSideBar} text='Admin' />
-      <div style={{ minHeight: "100vh", paddingTop: 100 }}>
+      <div style={{ minHeight: "100vh" }}>
         {auth ? (
           <Ref innerRef={stickyRef}>
-            <div>
+            <div style={{ paddingTop: 100 }}>
               <Sticky context={stickyRef} offset={64}>
                 <Menu inverted>
                   <Menu.Item
@@ -117,7 +116,19 @@ function Admin(props) {
             </div>
           </Ref>
         ) : (
-          <h1>Unauthorized</h1>
+          <div style={{ minHeight: "100vh" }}>
+            <div
+              style={{
+                padding: 0,
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%,-50%)",
+              }}
+            >
+              <h1 style={{ fontSize: "40px" }}>Unauthorized</h1>
+            </div>
+          </div>
         )}
         <NewTypeModal open={createNewType} setOpen={setCreateNewType} />
         <ErrorModal

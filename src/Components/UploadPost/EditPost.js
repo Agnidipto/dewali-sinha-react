@@ -1,21 +1,29 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { withRouter, useParams } from "react-router-dom";
 import { Segment, Form, Image, Button, Icon } from "semantic-ui-react";
+import MenuBar from "../../Containers/Menubar/Menubar";
+
 import _ from "lodash";
 
 import addPicture from "../../Utility/Pictures/addPicture.png";
+
 import ErrorModal from "../Modals/ErrorModal";
 import "./UploadPost.css";
 import ErrorFunction from "../ErrorFunction";
 
 import Cropper from "react-easy-crop";
-import savePost, { authority } from "./uploadPostService";
+import savePost, {
+  authority,
+  getPostById,
+  editPost,
+} from "./uploadPostService";
 import getCroppedImg from "../../Utility/cropImage";
 
 import Menubar from "../../Containers/Menubar/Menubar";
 
-function UploadPost(props) {
+function EditPost(props) {
   const [type, setType] = useState(_.startCase(_.toLower(useParams().type)));
+  const params = useParams();
   const [post, setPost] = useState({
     name: "",
     description: "",
@@ -53,6 +61,28 @@ function UploadPost(props) {
     authority()
       .then((res) => setAuth(true))
       .catch((err) => setError(ErrorFunction(err)));
+
+    getPostById(params.id).then((res) => {
+      const resd = res.data;
+      setPost({
+        name: resd.name,
+        id: resd.postId,
+        description: resd.description,
+        type: resd.type.type,
+      });
+      setFiles({
+        file1: resd.pictures[0]
+          ? "data:image/png;base64," + resd.pictures[0].file
+          : null,
+        file2: resd.pictures[1]
+          ? "data:image/png;base64," + resd.pictures[1].file
+          : null,
+        file3: resd.pictures[2]
+          ? "data:image/png;base64," + resd.pictures[2].file
+          : null,
+      });
+      console.log(resd);
+    });
   }, [0]);
   //crop functions
   const cropstyle = {
@@ -106,7 +136,6 @@ function UploadPost(props) {
   //image functions
 
   function removeImage(event) {
-    console.log(event.target.id);
     shiftLeft(event.target.id);
   }
 
@@ -123,7 +152,6 @@ function UploadPost(props) {
       ) {
         var reader = new FileReader();
         var url = reader.readAsDataURL(file);
-        console.log(event.target.id);
         reader.onloadend = function (e) {
           setImgSrc(reader.result);
           setShowCrop(true);
@@ -147,23 +175,20 @@ function UploadPost(props) {
 
   function handleTextChange(event, { name, value }) {
     setPost({ ...post, [name]: value });
-    console.log(post);
   }
 
   async function handleSubmit() {
     setPostSaving(true);
-    savePost(post, files)
+    console.log(params.id);
+    editPost(params.id, post, files)
       .then((res) => {
         setPostSaving(false);
         props.history.push("/admin");
-        console.log(res.data);
       })
       .catch((err) => {
-        setError({ open: true, message: err.response.data });
-        console.log(err);
+        setError(ErrorFunction(err));
         setPostSaving(false);
       });
-    // console.log(post);
   }
 
   const imageStyle = {
@@ -238,8 +263,10 @@ function UploadPost(props) {
 
   return (
     <>
-      <Menubar toggleSideBar={props.toggleSideBar} text='Upload Post' />
-
+      <Menubar
+        toggleSideBar={props.toggleSideBar}
+        text={"Edit Post " + params.id}
+      />
       {auth ? (
         <div
           style={{
@@ -316,7 +343,7 @@ function UploadPost(props) {
                 style={{ width: "60%", margin: "auto", minWidth: "400px" }}
                 className='segment-border'
               >
-                <h1>Upload post {type}</h1>
+                <h1>Edit {post.name}</h1>
 
                 <Form>
                   <Form.Input
@@ -380,4 +407,4 @@ function UploadPost(props) {
   );
 }
 
-export default withRouter(UploadPost);
+export default withRouter(EditPost);

@@ -5,6 +5,7 @@ import ValidateEmail from "../../../Utility/ValidateEmail";
 import ErrorModal from "../../Modals/ErrorModal";
 import ErrorFunction from "../../ErrorFunction";
 import login from "./adminLoginService";
+import Menubar from "../../../Containers/Menubar/Menubar";
 
 function Login(props) {
   const [user, setUser] = useState({
@@ -16,6 +17,10 @@ function Login(props) {
 
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleKeypress = (e) => {
     if (e.keyCode === 13) {
@@ -87,39 +92,42 @@ function Login(props) {
   );
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        paddingTop: 150,
-        textAlign: "center",
-      }}
-    >
-      <Segment
-        inverted
-        className='segment-border'
-        style={{ width: "50%", margin: "auto", minWidth: 400 }}
+    <>
+      <Menubar text='Dewali Sinha' toggleSideBar={props.toggleSideBar} />
+      <div
+        style={{
+          minHeight: "100vh",
+          paddingTop: 150,
+          textAlign: "center",
+        }}
       >
-        <h1 className='login-title'>Login!</h1>
+        <Segment
+          inverted
+          className='segment-border'
+          style={{ width: "50%", margin: "auto auto 20px", minWidth: 400 }}
+        >
+          <h1 className='login-title'>Login!</h1>
 
-        <Form inverted className='login-form'>
-          <br />
-          {emailInput}
-          <br />
-          {passwordInput}
-          <div class='login-button'>
-            <Button color='teal' onClick={handleSubmit} type='submit'>
-              Login
-            </Button>
-          </div>
-        </Form>
-      </Segment>
+          <Form inverted className='login-form'>
+            <br />
+            {emailInput}
+            <br />
+            {passwordInput}
+            <div class='login-button'>
+              <Button color='teal' onClick={handleSubmit} type='submit'>
+                Login
+              </Button>
+            </div>
+          </Form>
+        </Segment>
 
-      <ErrorModal
-        open={error.open}
-        setOpen={setError}
-        message={error.message}
-      />
-    </div>
+        <ErrorModal
+          open={error.open}
+          setOpen={setError}
+          message={error.message}
+        />
+      </div>
+    </>
   );
 }
 

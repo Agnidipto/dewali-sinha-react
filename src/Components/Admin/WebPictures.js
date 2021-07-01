@@ -36,7 +36,6 @@ function WebPictures(props) {
     getWebPictureHeadings()
       .then((res) => {
         setWebPictureHeadings(res.data);
-        console.log(res.data);
         var object = {};
         res.data.forEach((data) => {
           getWebPictureByHeading(data)

@@ -12,6 +12,8 @@ import getTypePostsCount, { getTypePage } from "./TypePageService";
 import _ from "lodash";
 import { Grid, Card, Icon, Button, Segment } from "semantic-ui-react";
 import Cards from "../Cards/Cards";
+import ReactGA from "react-ga";
+
 import CardLoading from "../Cards/CardLoading";
 
 function TypePage(props) {
@@ -28,6 +30,8 @@ function TypePage(props) {
   const [loadCard, setLoadCard] = useState(0);
 
   useEffect(() => {
+    ReactGA.initialize("UA-173426368-1");
+    ReactGA.pageview(window.location.pathname + window.location.search);
     getTypePostsCount(params.name)
       .then((res) => {
         const count = res.data;
@@ -41,11 +45,9 @@ function TypePage(props) {
 
   function refreshPost() {
     // for (var i = 0; i < total; i++)
-    console.log(x.length, total);
     if (x.length < total)
       getTypePage(type, page)
         .then((res) => {
-          console.log(res.data);
           res.data.map((data) => (data != null ? (x = x.concat(data)) : null));
           // x = x.concat(res.data[0]);
 

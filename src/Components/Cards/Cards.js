@@ -71,6 +71,14 @@ function Cards(props) {
           <Card.Content extra style={{ borderTop: "1px solid" }}>
             <div className='ui two buttons'>
               <Button
+                color='teal'
+                name={post.postId}
+                style={{ zIndex: 20 }}
+                onClick={() => props.history.push(`/edit/${post.postId}`)}
+              >
+                Edit
+              </Button>
+              <Button
                 color='red'
                 name={post.postId}
                 style={{ zIndex: 20 }}
